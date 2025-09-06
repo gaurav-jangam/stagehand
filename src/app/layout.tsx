@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: "Manage your songs and shows with ease.",
   manifest: "/manifest.json",
   icons: {
-    icon: `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22hsl(330 100% 50%)%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M9 18V5l12-2v13%22/><circle cx=%226%22 cy=%2218%22 r=%223%22/><circle cx=%2218%22 cy=%2216%22 r=%223%22/></svg>`
+    icon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22><rect width=%2224%22 height=%2224%22 rx=%224%22 ry=%224%22 fill=%22white%22/><path d=%22M9 18V5l12-2v13%22 stroke=%22hsl(330 100% 50%)%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/><circle cx=%226%22 cy=%2218%22 r=%223%22 stroke=%22hsl(330 100% 50%)%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/><circle cx=%2218%22 cy=%2216%22 r=%223%22 stroke=%22hsl(330 100% 50%)%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>"
   },
 };
 

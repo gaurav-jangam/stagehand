@@ -1,12 +1,17 @@
 
 import type {NextConfig} from 'next';
 require('dotenv').config();
-const withPWA = require('next-pwa')({
+const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development'
-})
+  cacheOnFrontendNav: true,
+  aggresiveFrontendNavCaching: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  disable: false,
+  workboxOptions: {
+    disableDevLogs: true,
+  },
+});
 
 const nextConfig: NextConfig = {
   /* config options here */
