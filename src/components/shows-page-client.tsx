@@ -8,7 +8,6 @@ import { PlusCircle, Calendar, MapPin, Music, Trash2, Search } from 'lucide-reac
 import Link from 'next/link';
 import { ClientDateString } from '@/components/ui/client-date';
 import type { Show } from '@/lib/types';
-import { FloatingInstruments } from '@/components/floating-instruments';
 import {
   Dialog,
   DialogContent,
@@ -97,7 +96,6 @@ export function ShowsPageClient({ allShows: initialShows }: { allShows: Show[] }
 
   return (
     <div className="relative min-h-full">
-      <FloatingInstruments />
       <div className="relative z-10 flex flex-col gap-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1.5">

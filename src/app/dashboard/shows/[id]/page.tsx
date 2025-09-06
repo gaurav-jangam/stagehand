@@ -1,10 +1,10 @@
 
-
 import { notFound } from 'next/navigation';
 import { connectToDatabase } from '@/lib/mongodb';
 import type { Show, Song, ShowSong } from '@/lib/types';
 import { ShowDetailPageClient } from '@/components/show-detail-page-client';
 import { ObjectId } from 'mongodb';
+import { FloatingInstruments } from '@/components/floating-instruments';
 
 type ShowSongWithDetails = ShowSong & Partial<Omit<Song, '_id' | 'id'>>;
 
@@ -63,5 +63,12 @@ export default async function ShowDetailPage({ params }: { params: { id: string 
   }).sort((a, b) => a.order - b.order);
 
 
-  return <ShowDetailPageClient show={show} initialShowSongs={showSongsWithDetails} />;
+  return (
+    <>
+        <FloatingInstruments />
+        <div className="relative z-10">
+          <ShowDetailPageClient show={show} initialShowSongs={showSongsWithDetails} />
+        </div>
+    </>
+  );
 }

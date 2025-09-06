@@ -1,3 +1,4 @@
+'use client';
 
 import React from 'react';
 import type { Song, Show } from '@/lib/types';
@@ -5,29 +6,28 @@ import { SongList } from '@/components/song-list';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { LogIn } from 'lucide-react';
-import { FloatingInstruments } from '@/components/floating-instruments';
-import { connectToDatabase } from '@/lib/mongodb';
 import { AssistantPage } from '@/components/assistant-page';
 import { PublicShowsList } from '@/components/public-shows-list';
+import { FloatingInstruments } from '@/components/floating-instruments';
+import { getSongs as fetchSongs, getShows as fetchShows } from '@/app/actions';
+import { useEffect, useState } from 'react';
 
-async function getSongs(): Promise<Song[]> {
-    const { db } = await connectToDatabase();
-    const songs = await db.collection('songs').find({}).sort({ name: 1 }).toArray();
-    return JSON.parse(JSON.stringify(songs));
-}
+export default function LandingPage() {
+  const [songs, setSongs] = useState<Song[]>([]);
+  const [shows, setShows] = useState<Show[]>([]);
 
-async function getShows(): Promise<Show[]> {
-    const { db } = await connectToDatabase();
-    const shows = await db.collection('shows').find({}).sort({ date: -1 }).toArray();
-    return JSON.parse(JSON.stringify(shows));
-}
-
-export default async function LandingPage() {
-  const songs = await getSongs();
-  const shows = await getShows();
+  useEffect(() => {
+    async function loadData() {
+      const songsData = await fetchSongs();
+      const showsData = await fetchShows();
+      setSongs(songsData);
+      setShows(showsData);
+    }
+    loadData();
+  }, []);
 
   return (
-    <div className="relative min-h-full overflow-x-hidden">
+    <>
       <FloatingInstruments />
       <div className="relative z-10 flex flex-col gap-12 p-4 md:p-6 lg:p-8">
         <header className="relative flex flex-col items-center justify-center gap-4 rounded-lg p-8 text-center shadow-md md:p-12">
@@ -76,6 +76,6 @@ export default async function LandingPage() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

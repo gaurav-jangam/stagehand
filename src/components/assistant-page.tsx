@@ -33,7 +33,7 @@ export function AssistantPage() {
     };
 
     return (
-        <div className="relative z-10 flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
             <Card className='backdrop-blur-[2px] bg-transparent'>
                 <CardHeader>
                     <CardTitle className='flex items-center gap-2'>

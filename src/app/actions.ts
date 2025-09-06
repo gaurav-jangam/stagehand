@@ -6,7 +6,7 @@ import { z } from "zod";
 import { songCategories } from "@/lib/data";
 import { connectToDatabase } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
-import type { Song } from "@/lib/types";
+import type { Song, Show } from "@/lib/types";
 
 const songSchema = z.object({
   name: z.string().min(1, "Song name is required."),
@@ -363,4 +363,9 @@ export async function getSongs(songIds?: string[]): Promise<Song[]> {
     return JSON.parse(JSON.stringify(songs));
 }
 
+export async function getShows(): Promise<Show[]> {
+    const { db } = await connectToDatabase();
+    const shows = await db.collection('shows').find({}).sort({ date: -1 }).toArray();
+    return JSON.parse(JSON.stringify(shows));
+}
     

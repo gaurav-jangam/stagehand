@@ -1,17 +1,28 @@
+'use client';
 
-import React from 'react';
-import { connectToDatabase } from '@/lib/mongodb';
+import React, { useEffect, useState } from 'react';
 import type { Show } from '@/lib/types';
 import { ShowsPageClient } from '@/components/shows-page-client';
+import { FloatingInstruments } from '@/components/floating-instruments';
+import { getShows as fetchShows } from '@/app/actions';
 
-async function getShows(): Promise<Show[]> {
-    const { db } = await connectToDatabase();
-    const shows = await db.collection('shows').find({}).sort({ date: -1 }).toArray();
-    return JSON.parse(JSON.stringify(shows));
-}
+export default function ShowsPage() {
+    const [shows, setShows] = useState<Show[]>([]);
 
-export default async function ShowsPage() {
-    const shows = await getShows();
+    useEffect(() => {
+        async function loadShows() {
+            const showsData = await fetchShows();
+            setShows(showsData);
+        }
+        loadShows();
+    }, []);
 
-    return <ShowsPageClient allShows={shows} />;
+    return (
+        <>
+            <FloatingInstruments />
+            <div className="relative z-10">
+                <ShowsPageClient allShows={shows} />
+            </div>
+        </>
+    );
 }

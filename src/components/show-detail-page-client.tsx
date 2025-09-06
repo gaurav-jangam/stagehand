@@ -31,7 +31,6 @@ import {
   } from "@/components/ui/dialog";
 import { ClientDate } from '@/components/ui/client-date';
 import type { Show, Song, ShowSong } from '@/lib/types';
-import { FloatingInstruments } from '@/components/floating-instruments';
 import { useState, useEffect } from 'react';
 import { removeSongFromShow, getSongs } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
@@ -158,7 +157,6 @@ export function ShowDetailPageClient({ show, initialShowSongs }: ShowDetailPageC
 
   return (
     <div className="relative min-h-full">
-        <FloatingInstruments />
         <div className="relative z-10 flex flex-col gap-6">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">

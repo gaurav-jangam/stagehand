@@ -1,22 +1,25 @@
+'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Song } from '@/lib/types';
 import { SongList } from '@/components/song-list';
 import { FloatingInstruments } from '@/components/floating-instruments';
-import { connectToDatabase } from '@/lib/mongodb';
-
-async function getSongs(): Promise<Song[]> {
-    const { db } = await connectToDatabase();
-    const songs = await db.collection('songs').find({}).sort({ name: 1 }).toArray();
-    return JSON.parse(JSON.stringify(songs));
-}
+import { getSongs as fetchSongs } from '@/app/actions';
 
 
-export default async function SongsPage() {
-  const songs = await getSongs();
+export default function SongsPage() {
+  const [songs, setSongs] = useState<Song[]>([]);
+
+  useEffect(() => {
+    async function loadSongs() {
+      const songsData = await fetchSongs();
+      setSongs(songsData);
+    }
+    loadSongs();
+  }, []);
   
   return (
-    <div className="relative min-h-full">
+    <>
       <FloatingInstruments />
       <div className="relative z-10 flex flex-col gap-6">
         <div className="space-y-1.5">
@@ -25,6 +28,6 @@ export default async function SongsPage() {
         </div>
         <SongList initialSongs={songs} />
       </div>
-    </div>
+    </>
   );
 }
