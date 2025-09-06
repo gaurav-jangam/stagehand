@@ -197,7 +197,7 @@ export function ShowsPageClient({ allShows: initialShows }: { allShows: Show[] }
               totalPages={totalPages}
               rowsPerPage={rowsPerPage}
               totalItems={totalItems}
-              setRowsPerPage={(val) => { setRowsPerPage(val); setCurrentPage(1); }}
+              setRowsPerPage={(val) => { setRowsPerPage(val as 5 | 10 | 20 | 50 | 100); setCurrentPage(1); }}
               onPageChange={setCurrentPage}
               canPreviousPage={canPrevPage}
               canNextPage={canNextPage}
